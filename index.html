@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>3.Ajaxowy polyﬁll dla funkcji fetch </title>
+</head>
+<body>
+	<h1>3. Ajaxowy polyﬁll dla funkcji fetch </h1>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script>
+		
+		function fetchNew(url, fnDone, fnFall){
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", url, true);
+	
+			xhr.onreadystatechange = function(){
+				if (this.readyState === 4 && this.status === 200){
+					return fnDone(this.responce);
+				}else{
+					return fnFall(this.status);
+				}
+			}
+			
+			xhr.send(null);
+		}
+		
+		fetchNew(" https:// jsonplaceholder.typicode.com/users", function(data){
+			console.log("Sukces");
+			cosole.log(data);
+		}, function(err){
+			console.log("Błąd!");
+			console.log(err);
+		});
+		
+	</script>
+</body>
